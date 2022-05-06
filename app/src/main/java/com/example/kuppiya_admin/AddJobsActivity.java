@@ -49,14 +49,13 @@ public class AddJobsActivity extends AppCompatActivity {
 
                 jobsHelperClass helperClass = new jobsHelperClass(jobTitle, jobSalary, company, jobLocation, mobile, jobEmail);
 
-                myRef.push().setValue(helperClass);
-
-                Context context = getApplicationContext();
-                CharSequence text = "Job added!";
-                int duration = Toast.LENGTH_SHORT;
-
-                Toast toast = Toast.makeText(context, text, duration);
-                toast.show();
+                myRef.push().setValue(helperClass).addOnSuccessListener(suc ->
+                {
+                    Toast.makeText(getApplicationContext(), "Record is inserted", Toast.LENGTH_SHORT).show();
+                }).addOnFailureListener(er ->
+                {
+                    Toast.makeText(getApplicationContext(), "" + er.getMessage(), Toast.LENGTH_SHORT).show();
+                });
 
                 Intent intent = new Intent(getApplicationContext(), ManageJobsActivity.class);
                 startActivity(intent);

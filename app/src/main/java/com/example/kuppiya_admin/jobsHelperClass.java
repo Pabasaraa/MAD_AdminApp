@@ -1,7 +1,14 @@
 package com.example.kuppiya_admin;
 
-public class jobsHelperClass {
-    String title, salary, companyName, location, contactNo, email;
+import com.google.firebase.database.Exclude;
+
+import java.io.Serializable;
+
+public class jobsHelperClass implements Serializable {
+    @Exclude
+    private String key;
+
+    private String title, salary, companyName, location, contactNo, email;
 
     public jobsHelperClass(String title, String salary, String companyName, String location, String contactNo, String email) {
         this.title = title;
@@ -61,4 +68,8 @@ public class jobsHelperClass {
     public void setEmail(String email) {
         this.email = email;
     }
+
+    public String getKey() { return key; }
+
+    public void setKey(String key) { this.key = key; }
 }
