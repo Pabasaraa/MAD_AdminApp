@@ -3,6 +3,7 @@ package com.example.kuppiya_admin;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -21,6 +22,7 @@ public class AddJobsActivity extends AppCompatActivity {
 
     FirebaseDatabase database = FirebaseDatabase.getInstance("https://kuppiya-mad-default-rtdb.asia-southeast1.firebasedatabase.app");
     DatabaseReference myRef = database.getReference("jobs");
+    DatabaseReference keyRef = myRef.push();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +39,8 @@ public class AddJobsActivity extends AppCompatActivity {
 
 
         addBtn.setOnClickListener(new View.OnClickListener() {
+            private String Tag = "Tag//";
+
             @Override
             public void onClick(View view) {
 
@@ -46,19 +50,24 @@ public class AddJobsActivity extends AppCompatActivity {
                 String jobLocation = Objects.requireNonNull(location.getEditText()).getText().toString();
                 String mobile = Objects.requireNonNull(contactNo.getEditText()).getText().toString();
                 String jobEmail = Objects.requireNonNull(email.getEditText()).getText().toString();
+                String key = keyRef.getKey();
 
-                jobsHelperClass helperClass = new jobsHelperClass(jobTitle, jobSalary, company, jobLocation, mobile, jobEmail);
+                jobsHelperClass helperClass = new jobsHelperClass(jobTitle, jobSalary, company, jobLocation, mobile, jobEmail, key);
 
-                myRef.push().setValue(helperClass).addOnSuccessListener(suc ->
+                keyRef.setValue(helperClass).addOnSuccessListener(suc ->
                 {
+                    helperClass.setKey(key);
+                    Log.d(Tag, ""+key);
                     Toast.makeText(getApplicationContext(), "Record is inserted", Toast.LENGTH_SHORT).show();
+
+                    Intent intent = new Intent(getApplicationContext(), ManageJobsActivity.class);
+                    startActivity(intent);
+                    finish();
                 }).addOnFailureListener(er ->
                 {
                     Toast.makeText(getApplicationContext(), "" + er.getMessage(), Toast.LENGTH_SHORT).show();
                 });
 
-                Intent intent = new Intent(getApplicationContext(), ManageJobsActivity.class);
-                startActivity(intent);
             }
         });
     }

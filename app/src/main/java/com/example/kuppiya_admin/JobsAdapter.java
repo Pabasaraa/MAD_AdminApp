@@ -8,9 +8,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -18,6 +22,8 @@ import java.util.ArrayList;
 public class JobsAdapter extends RecyclerView.Adapter<JobsAdapter.JobsViewHolder> {
     Context context;
     ArrayList<jobsHelperClass> list;
+    FirebaseDatabase database = FirebaseDatabase.getInstance("https://kuppiya-mad-default-rtdb.asia-southeast1.firebasedatabase.app");
+    DatabaseReference myRef = database.getReference("jobs");
 
     public JobsAdapter(Context context, ArrayList<jobsHelperClass> list) {
         this.context = context;
@@ -41,6 +47,18 @@ public class JobsAdapter extends RecyclerView.Adapter<JobsAdapter.JobsViewHolder
             Intent intent = new Intent(context, UpdateJobsActivity.class);
             intent.putExtra("EDIT", (Serializable) helperClass);
             context.startActivity(intent);
+        });
+
+        holder.deleteJobs.setOnClickListener(view -> {
+            myRef.child(helperClass.getKey()).removeValue().addOnSuccessListener(suc->
+            {
+                Toast.makeText(context, "Record is removed", Toast.LENGTH_SHORT).show();
+                notifyItemRemoved(position);
+                list.remove(helperClass);
+            }).addOnFailureListener(er->
+            {
+                Toast.makeText(context, ""+er.getMessage(), Toast.LENGTH_SHORT).show();
+            });
         });
     }
 

@@ -38,7 +38,7 @@ public class UpdateJobsActivity extends AppCompatActivity {
         email = findViewById(R.id.email_updateJobs);
         updateBtn = findViewById(R.id.update_btn_jobs);
 
-        //edit_jobs.getKey() won't get the key it's only return null needs to fix it
+        //it retrieve the unique key after testing remove this one+++
         String gg = "hh";
         Log.d(gg, ""+edit_jobs.getKey());
 
@@ -62,7 +62,7 @@ public class UpdateJobsActivity extends AppCompatActivity {
                 hashMap.put("title", title.getEditText().getText().toString());
 
                 //Just for testing purpose I passed a key
-                myRef.child("-N11zu1ZpUIPhQLp5dyD").updateChildren(hashMap).addOnSuccessListener(suc ->
+                myRef.child(edit_jobs.getKey()).updateChildren(hashMap).addOnSuccessListener(suc ->
                 {
                     Toast.makeText(getApplicationContext(), "Record is updated", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(getApplicationContext(), ManageJobsActivity.class);

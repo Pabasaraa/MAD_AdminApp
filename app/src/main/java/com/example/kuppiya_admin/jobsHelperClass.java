@@ -5,18 +5,17 @@ import com.google.firebase.database.Exclude;
 import java.io.Serializable;
 
 public class jobsHelperClass implements Serializable {
-    @Exclude
     private String key;
-
     private String title, salary, companyName, location, contactNo, email;
 
-    public jobsHelperClass(String title, String salary, String companyName, String location, String contactNo, String email) {
+    public jobsHelperClass(String title, String salary, String companyName, String location, String contactNo, String email, String key) {
         this.title = title;
         this.salary = salary;
         this.companyName = companyName;
         this.location = location;
         this.contactNo = contactNo;
         this.email = email;
+        this.key = key;
     }
 
     public jobsHelperClass() { }
