@@ -1,13 +1,17 @@
 package com.example.kuppiya_admin;
 
-public class newsHelperClass {
+import java.io.Serializable;
 
-        String topic, description;
+public class newsHelperClass implements Serializable {
+
+       private String key;
+       private  String topic, description;
 
 
-    public newsHelperClass(String topic, String description) {
+    public newsHelperClass(String topic, String description,String key) {
         this.topic = topic;
         this.description = description;
+        this.key = key;
     }
 
     public newsHelperClass() { }
@@ -27,4 +31,8 @@ public class newsHelperClass {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    public String getKey() { return key; }
+
+    public void setKey(String key) { this.key = key; }
 }
