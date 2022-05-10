@@ -1,12 +1,18 @@
 package com.example.kuppiya_admin;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputLayout;
@@ -19,6 +25,8 @@ import java.util.Objects;
 public class UpdateJobsActivity extends AppCompatActivity {
     TextInputLayout title, salary, companyName, location, contactNo, email;
     Button updateBtn;
+    ImageView backImg;
+    public String CHANNEL_ID = "Id_1";
 
     FirebaseDatabase database = FirebaseDatabase.getInstance("https://kuppiya-mad-default-rtdb.asia-southeast1.firebasedatabase.app");
     DatabaseReference myRef = database.getReference("jobs");
@@ -30,6 +38,13 @@ public class UpdateJobsActivity extends AppCompatActivity {
 
         jobsHelperClass edit_jobs = (jobsHelperClass) getIntent().getSerializableExtra("EDIT");
 
+        CharSequence name = "Add Job notification";
+        int importance = NotificationManager.IMPORTANCE_DEFAULT;
+        NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, importance);
+        channel.setDescription("Notification that shows when a job added to the DB");
+        NotificationManager notificationManager = getSystemService(NotificationManager.class);
+        notificationManager.createNotificationChannel(channel);
+
         title = findViewById(R.id.jobTitle_updateJobs);
         salary = findViewById(R.id.salary_updateJobs);
         companyName = findViewById(R.id.company_updateJobs);
@@ -37,8 +52,8 @@ public class UpdateJobsActivity extends AppCompatActivity {
         contactNo = findViewById(R.id.mobile_updateJobs);
         email = findViewById(R.id.email_updateJobs);
         updateBtn = findViewById(R.id.update_btn_jobs);
+        backImg = findViewById(R.id.back_button_updateJobs);
 
-        //it retrieve the unique key after testing remove this one+++
         String gg = "hh";
         Log.d(gg, ""+edit_jobs.getKey());
 
@@ -61,17 +76,37 @@ public class UpdateJobsActivity extends AppCompatActivity {
                 hashMap.put("salary", salary.getEditText().getText().toString());
                 hashMap.put("title", title.getEditText().getText().toString());
 
-                //Just for testing purpose I passed a key
                 myRef.child(edit_jobs.getKey()).updateChildren(hashMap).addOnSuccessListener(suc ->
                 {
+                    Intent intentNotify = new Intent(getApplicationContext (), ManageJobsActivity.class);
+                    PendingIntent pendingIntent = PendingIntent.getActivity(getApplicationContext (), 0, intentNotify, 0);
+
+                    NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext (), CHANNEL_ID)
+                            .setSmallIcon(R.drawable.logo)
+                            .setContentTitle("Job Added!")
+                            .setContentText("Job details added to the database successfully.")
+                            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                            .setContentIntent(pendingIntent)
+                            .setAutoCancel(true);
+
+                    NotificationManagerCompat notificationManager = NotificationManagerCompat.from(getApplicationContext ());
+                    notificationManager.notify(0, builder.build());
+
                     Toast.makeText(getApplicationContext(), "Record is updated", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(getApplicationContext(), ManageJobsActivity.class);
+                    Intent intent = new Intent(getApplicationContext(), Home.class);
                     startActivity(intent);
+                    finish();
                 }).addOnFailureListener(er ->
                 {
                     Toast.makeText(getApplicationContext(), "" + er.getMessage(), Toast.LENGTH_SHORT).show();
                 });
             }
+        });
+
+        backImg.setOnClickListener( view -> {
+            Intent intent = new Intent (getApplicationContext(), ManageJobsActivity.class);
+            startActivity(intent);
+            finish ();
         });
     }
 }

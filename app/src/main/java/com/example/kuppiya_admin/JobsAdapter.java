@@ -1,5 +1,6 @@
 package com.example.kuppiya_admin;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Parcelable;
@@ -55,6 +56,9 @@ public class JobsAdapter extends RecyclerView.Adapter<JobsAdapter.JobsViewHolder
                 Toast.makeText(context, "Record is removed", Toast.LENGTH_SHORT).show();
                 notifyItemRemoved(position);
                 list.remove(helperClass);
+                Intent intent = new Intent (context, ManageJobsActivity.class);
+                context.startActivity(intent);
+                ((Activity)context).finish();
             }).addOnFailureListener(er->
             {
                 Toast.makeText(context, ""+er.getMessage(), Toast.LENGTH_SHORT).show();

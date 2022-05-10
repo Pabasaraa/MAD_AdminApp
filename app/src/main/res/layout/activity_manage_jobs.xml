@@ -28,7 +28,7 @@
             app:layout_constraintVertical_bias="1.0">
 
             <ImageView
-                android:id="@+id/back_button_settings"
+                android:id="@+id/back_button_manageJobs"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/back_button"

@@ -3,12 +3,6 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Mad/Mad_admin_GitHub/MAD_AdminApp/app/src/main/res/layout/activity_add_jobs.xml" value="0.25416666666666665" />
-        <entry key="..\:/Mad/Mad_admin_GitHub/MAD_AdminApp/app/src/main/res/layout/activity_add_news.xml" value="0.25416666666666665" />
-        <entry key="..\:/Mad/Mad_admin_GitHub/MAD_AdminApp/app/src/main/res/layout/activity_manage_news.xml" value="0.25416666666666665" />
-        <entry key="..\:/Mad/Mad_admin_GitHub/MAD_AdminApp/app/src/main/res/layout/activity_update_jobs.xml" value="0.25416666666666665" />
-        <entry key="..\:/Mad/Mad_admin_GitHub/MAD_AdminApp/app/src/main/res/layout/activity_update_news.xml" value="0.25416666666666665" />
-        <entry key="..\:/Mad/Mad_admin_GitHub/MAD_AdminApp/app/src/main/res/layout/news.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/pabas/AndroidStudioProjects/Kuppiya_admin/app/src/main/res/drawable/edit_text_bg.xml" value="0.235" />
         <entry key="..\:/Users/pabas/AndroidStudioProjects/Kuppiya_admin/app/src/main/res/layout/activity_add_jobs.xml" value="0.30085470085470084" />
         <entry key="..\:/Users/pabas/AndroidStudioProjects/Kuppiya_admin/app/src/main/res/layout/activity_add_news.xml" value="0.33" />
@@ -17,7 +11,7 @@
         <entry key="..\:/Users/pabas/AndroidStudioProjects/Kuppiya_admin/app/src/main/res/layout/activity_manage_news.xml" value="0.33" />
         <entry key="..\:/Users/pabas/AndroidStudioProjects/Kuppiya_admin/app/src/main/res/layout/activity_update_jobs.xml" value="0.30085470085470084" />
         <entry key="..\:/Users/pabas/AndroidStudioProjects/Kuppiya_admin/app/src/main/res/layout/activity_update_news.xml" value="0.30085470085470084" />
-        <entry key="..\:/Users/pabas/AndroidStudioProjects/Kuppiya_admin/app/src/main/res/layout/item.xml" value="0.33" />
+        <entry key="..\:/Users/pabas/AndroidStudioProjects/Kuppiya_admin/app/src/main/res/layout/item.xml" value="0.2773109243697479" />
       </map>
     </option>
   </component>
