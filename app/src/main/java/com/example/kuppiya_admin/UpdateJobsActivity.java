@@ -83,8 +83,8 @@ public class UpdateJobsActivity extends AppCompatActivity {
 
                     NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext (), CHANNEL_ID)
                             .setSmallIcon(R.drawable.logo)
-                            .setContentTitle("Job Added!")
-                            .setContentText("Job details added to the database successfully.")
+                            .setContentTitle("Job Updated!")
+                            .setContentText("Job details Updated in the database successfully.")
                             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                             .setContentIntent(pendingIntent)
                             .setAutoCancel(true);
